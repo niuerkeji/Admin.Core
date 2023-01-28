@@ -1,40 +1,52 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ZhonTai.Admin.Core.Dto;
+using ZhonTai.Admin.Domain.User.Dto;
 using ZhonTai.Admin.Services.Auth.Dto;
 using ZhonTai.Admin.Services.User.Dto;
 
-namespace ZhonTai.Admin.Services.User
+namespace ZhonTai.Admin.Services.User;
+
+/// <summary>
+/// 用户接口
+/// </summary>
+public interface IUserService
 {
-    /// <summary>
-    /// 用户接口
-    /// </summary>
-    public interface IUserService
-    {
-        Task<ResultOutput<AuthLoginOutput>> GetLoginUserAsync(long id);
+    Task<UserGetOutput> GetAsync(long id);
 
-        Task<IResultOutput> GetAsync(long id);
+    Task<PageOutput<UserGetPageOutput>> GetPageAsync(PageInput<UserGetPageDto> input);
 
-        Task<IResultOutput> GetSelectAsync();
+    Task<AuthLoginOutput> GetLoginUserAsync(long id);
 
-        Task<IResultOutput> GetPageAsync(PageInput input);
+    Task<DataPermissionDto> GetDataPermissionAsync();
 
-        Task<IResultOutput> AddAsync(UserAddInput input);
+    Task<long> AddAsync(UserAddInput input);
 
-        Task<IResultOutput> UpdateAsync(UserUpdateInput input);
+    Task<long> AddMemberAsync(UserAddMemberInput input);
 
-        Task<IResultOutput> DeleteAsync(long id);
+    Task UpdateAsync(UserUpdateInput input);
 
-        Task<IResultOutput> SoftDeleteAsync(long id);
+    Task DeleteAsync(long id);
 
-        Task<IResultOutput> BatchSoftDeleteAsync(long[] ids);
+    Task BatchDeleteAsync(long[] ids);
 
-        Task<IResultOutput> ChangePasswordAsync(UserChangePasswordInput input);
+    Task SoftDeleteAsync(long id);
 
-        Task<IResultOutput> UpdateBasicAsync(UserUpdateBasicInput input);
+    Task BatchSoftDeleteAsync(long[] ids);
 
-        Task<IResultOutput> GetBasicAsync();
+    Task ChangePasswordAsync(UserChangePasswordInput input);
 
-        Task<IList<UserPermissionsOutput>> GetPermissionsAsync();
-    }
+    Task<string> ResetPasswordAsync(UserResetPasswordInput input);
+
+    Task SetManagerAsync(UserSetManagerInput input);
+
+    Task UpdateBasicAsync(UserUpdateBasicInput input);
+
+    Task<UserGetBasicOutput> GetBasicAsync();
+
+    Task<IList<UserPermissionsOutput>> GetPermissionsAsync();
+
+    Task<string> AvatarUpload([FromForm] IFormFile file, bool autoUpdate = false);
 }

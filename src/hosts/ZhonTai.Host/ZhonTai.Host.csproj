@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<Description>中台接口宿主</Description>
 	</PropertyGroup>
 
@@ -10,7 +10,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Configs\createdbsql.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Configs\createdbsql.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\platform\ZhonTai.Admin\ZhonTai.Admin.csproj" />
+		<ProjectReference Include="..\..\platform\ZhonTai.ApiUI\ZhonTai.ApiUI.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,4 +39,6 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

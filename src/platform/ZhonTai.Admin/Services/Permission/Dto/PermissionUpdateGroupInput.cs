@@ -1,15 +1,14 @@
-﻿namespace ZhonTai.Admin.Services.Permission.Dto
-{
-    public class PermissionUpdateGroupInput : PermissionAddGroupInput
-    {
-        /// <summary>
-        /// 权限Id
-        /// </summary>
-        public long Id { get; set; }
+﻿using System.ComponentModel.DataAnnotations;
+using ZhonTai.Admin.Core.Validators;
 
-        /// <summary>
-        /// 版本
-        /// </summary>
-        public long Version { get; set; }
-    }
+namespace ZhonTai.Admin.Services.Permission.Dto;
+
+public class PermissionUpdateGroupInput : PermissionAddGroupInput
+{
+    /// <summary>
+    /// 权限Id
+    /// </summary>
+    [Required]
+    [ValidateRequired("请选择分组")]
+    public long Id { get; set; }
 }

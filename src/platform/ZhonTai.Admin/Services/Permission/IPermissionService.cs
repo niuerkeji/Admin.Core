@@ -1,56 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ZhonTai.Admin.Core.Dto;
 using ZhonTai.Admin.Services.Permission.Dto;
 
-namespace ZhonTai.Admin.Services.Permission
+namespace ZhonTai.Admin.Services.Permission;
+
+/// <summary>
+/// 权限接口
+/// </summary>
+public partial interface IPermissionService
 {
-    /// <summary>
-    /// 权限接口
-    /// </summary>
-    public partial interface IPermissionService
-    {
-        Task<IResultOutput> GetAsync(long id);
+    Task<PermissionGetGroupOutput> GetGroupAsync(long id);
 
-        Task<IResultOutput> GetGroupAsync(long id);
+    Task<PermissionGetMenuOutput> GetMenuAsync(long id);
 
-        Task<IResultOutput> GetMenuAsync(long id);
+    Task<PermissionGetApiOutput> GetApiAsync(long id);
 
-        Task<IResultOutput> GetApiAsync(long id);
+    Task<PermissionGetDotOutput> GetDotAsync(long id);
 
-        Task<IResultOutput> GetDotAsync(long id);
+    Task<IEnumerable<dynamic>> GetPermissionList();
 
-        Task<IResultOutput> GetPermissionList();
+    Task<List<long>> GetRolePermissionList(long roleId);
 
-        Task<IResultOutput> GetRolePermissionList(long roleId);
+    Task<List<long>> GetTenantPermissionList(long tenantId);
 
+    Task<List<PermissionListOutput>> GetListAsync(string key, DateTime? start, DateTime? end);
 
-        Task<IResultOutput> GetTenantPermissionList(long tenantId);
+    Task<long> AddGroupAsync(PermissionAddGroupInput input);
 
-        Task<IResultOutput> GetListAsync(string key, DateTime? start, DateTime? end);
+    Task<long> AddMenuAsync(PermissionAddMenuInput input);
 
-        Task<IResultOutput> AddGroupAsync(PermissionAddGroupInput input);
+    Task<long> AddApiAsync(PermissionAddApiInput input);
 
-        Task<IResultOutput> AddMenuAsync(PermissionAddMenuInput input);
+    Task<long> AddDotAsync(PermissionAddDotInput input);
 
-        Task<IResultOutput> AddApiAsync(PermissionAddApiInput input);
+    Task UpdateGroupAsync(PermissionUpdateGroupInput input);
 
-        Task<IResultOutput> AddDotAsync(PermissionAddDotInput input);
+    Task UpdateMenuAsync(PermissionUpdateMenuInput input);
 
-        Task<IResultOutput> UpdateGroupAsync(PermissionUpdateGroupInput input);
+    Task UpdateApiAsync(PermissionUpdateApiInput input);
 
-        Task<IResultOutput> UpdateMenuAsync(PermissionUpdateMenuInput input);
+    Task UpdateDotAsync(PermissionUpdateDotInput input);
 
-        Task<IResultOutput> UpdateApiAsync(PermissionUpdateApiInput input);
+    Task DeleteAsync(long id);
 
-        Task<IResultOutput> UpdateDotAsync(PermissionUpdateDotInput input);
+    Task SoftDeleteAsync(long id);
 
-        Task<IResultOutput> DeleteAsync(long id);
+    Task AssignAsync(PermissionAssignInput input);
 
-        Task<IResultOutput> SoftDeleteAsync(long id);
-
-        Task<IResultOutput> AssignAsync(PermissionAssignInput input);
-
-        Task<IResultOutput> SaveTenantPermissionsAsync(PermissionSaveTenantPermissionsInput input);
-    }
+    Task SaveTenantPermissionsAsync(PermissionSaveTenantPermissionsInput input);
 }

@@ -1,18 +1,17 @@
-﻿namespace ZhonTai.Admin.Services.Role.Dto
+﻿using System.ComponentModel.DataAnnotations;
+using ZhonTai.Admin.Core.Validators;
+
+namespace ZhonTai.Admin.Services.Role.Dto;
+
+/// <summary>
+/// 修改
+/// </summary>
+public partial class RoleUpdateInput : RoleAddInput
 {
     /// <summary>
-    /// 修改
+    /// 角色Id
     /// </summary>
-    public partial class RoleUpdateInput : RoleAddInput
-    {
-        /// <summary>
-        /// 接口Id
-        /// </summary>
-        public long Id { get; set; }
-
-        /// <summary>
-        /// 版本
-        /// </summary>
-        public long Version { get; set; }
-    }
+    [Required]
+    [ValidateRequired("请选择角色")]
+    public long Id { get; set; }
 }
